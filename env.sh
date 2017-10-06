@@ -38,7 +38,7 @@ EOF
 )"	
 }
 function backgroundImage {
-    wget -O $DIR/background.jpg http://cin.ufpe.br/~vags/tardis_wallpaper.jpg
+    wget -O $DIR/background.jpg http://cin.ufpe.br/~lbn/img/wallpaper.JPG
     gsettings set org.gnome.desktop.background picture-uri file://$DIR/background.jpg
 }
 function addShortcut {    
@@ -86,17 +86,6 @@ EOF
     addShortcut firefoxdev.desktop
 }
 
-function telegram {
-	doing "Installing telegram"
-	doing "Downloading telegram"
-	wget -O $DIR/telegram.tar.xz https://telegram.org/dl/desktop/linux
-	mkdir ~/apps/telegram	
-	tar -xvf $DIR/telegram.tar.xz --strip 1 -C $DIR/telegram
-	doing "Executing telegram"
-	$DIR/telegram/Telegram &
-    configTelegram
-	finished "Telegram successfully installed\n"   
-}
 
 function code {	
 	doing "Installing vs code"
@@ -126,23 +115,6 @@ function nodeJS {
     finished "Node.js installed successfully!"
 }
 
-function configTelegram {
-cat << EOF > $HOME/.local/share/applications/telegram.desktop
-[Desktop Entry]
-Encoding=UTF-8
-Version=1.0
-Type=Application
-Name=Telegram 
-Icon=telegram
-Path=$DIR/telegram/
-Exec=$DIR/telegram/Telegram
-StartupNotify=false
-StartupWMClass=Telegram
-OnlyShowIn=Unity;
-X-UnityGenerated=true
-EOF
-    addShortcut telegram.desktop
-}
 
 
 function configCode {    
@@ -220,8 +192,6 @@ function MAIN {
     backgroundImage
     firefoxDEV
     configFirefoxDEV
-	telegram
-    configTelegram
     code
     configCode
     nodeJS    

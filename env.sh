@@ -90,13 +90,10 @@ EOF
 function code {	
 	doing "Installing vs code"
 	doing "Downloading vs code"
-	wget -O $DIR/code.tar.gz https://go.microsoft.com/fwlink/?LinkID=620884
-	mkdir ~/apps/code	
-	tar -vzxf $DIR/code.tar.gz --strip 1 -C $DIR/code
+    git clone https://github.com/levibn/linuxvs $HOME/Desktop/linuxvs
 	doing "Adding settings"
 	configCode
-	doing "Executing vs code"	
-	$DIR/code/code &
+	doing "Executing vs code"
 	finished "VS Code successfully installed\n"
 }
 function copy {
@@ -118,61 +115,8 @@ function nodeJS {
 
 
 function configCode {    
-cat << EOF > $HOME/.config/Code/User/settings.json	
-{
-    "files.autoSave": "off",
-    "workbench.colorTheme": "Northem Dark",
-    "workbench.iconTheme": "material-icon-theme",
-    "sync.gist": "47639fa50f09b6dc7d21d33dc7922860",
-    "sync.lastUpload": "2017-09-20T12:01:35.443Z",
-    "sync.autoDownload": true,
-    "sync.autoUpload": false,
-    "sync.lastDownload": "2017-09-14T18:56:08.370Z",
-    "sync.forceDownload": false,
-    "sync.anonymousGist": false,
-    "sync.host": "",
-    "sync.pathPrefix": "",
-    "sync.quietSync": false,
-    "sync.askGistName": false,
-    "explorer.autoReveal": false,
-    "workbench.activityBar.visible": true,
-    "files.associations": {
-        "*.twig": "html",
-        "*.html": "html"
-    },
-    "extensions.ignoreRecommendations": false,
-    "window.zoomLevel": 0,
-    "workbench.quickOpen.closeOnFocusLost": false
-}
-EOF
-
-cat << EOF > $HOME/.config/Code/User/keybindings.json	
-[
-    { "key": "ctrl+\\\\",               "command": "workbench.action.toggleSidebarVisibility" },
-    { "key": "ctrl+k ctrl+up",          "command": "workbench.action.splitEditor" },
-    { "key": "ctrl+t",                  "command": "workbench.action.quickOpen" },
-    { "key": "ctrl+e",                  "command": "workbench.action.showAllSymbols" },
-    { "key": "ctrl+j",                  "command": "workbench.action.terminal.toggleTerminal" },
-    { "key": "ctrl+shift+i",            "command": "HookyQR.beautifyFile"},
-    { "key": "ctrl+shift+c",            "command": "editor.action.blockComment"}
-]
-EOF
-
-cat << EOF > $HOME/.local/share/applications/code.desktop
-[Desktop Entry]
-Encoding=UTF-8
-Version=1.0
-Type=Application
-Name=Code 
-Icon=visualstudiocode
-Path=$DIR/code/
-Exec=$DIR/code/code
-StartupNotify=false
-StartupWMClass=Code
-OnlyShowIn=Unity;
-X-UnityGenerated=true
-EOF
-
+    chmod +x $HOME/Desktop/linuxvs/make.sh
+    ./$HOME/Desktop/linuxvs/make.sh
     addShortcut code.desktop
 }
 

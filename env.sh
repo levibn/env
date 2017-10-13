@@ -116,7 +116,7 @@ function nodeJS {
         chmod +x $HOME/Desktop/install_nvm.sh
         bash $HOME/Desktop/install_nvm.sh
         source ~/.profile
-        nvm install
+        nvm install 8.6.0
     fi    
 
     finished "Node.js installed successfully!"

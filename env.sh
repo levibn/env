@@ -102,12 +102,22 @@ function copy {
 
 function nodeJS {    
     doing "installing Node.js...\n"
-    wget -O $DIR/node.txz https://nodejs.org/dist/v6.11.3/node-v6.11.3-linux-x64.tar.xz     
-    pv -n $DIR/node.txz  | tar -xJf - -C $DIR/node/ 
-    copy "Node.js (part 1/4)" $DIR/node/*/bin $HOME/teste
-    copy "Node.js (part 2/4)" $DIR/node/*/include $HOME/teste
-    copy "Node.js (part 3/4)" /tmp/node*/lib $HOME/.local
-    copy "Node.js (part 4/4)" /tmp/node*/share $HOME/.local
+    wget -O $DIR/node.txz https://nodejs.org/dist/v6.11.3/node-v6.11.3-linux-x64.tar.xz
+    command -v pv
+    if [ $? -eq 0 ]; then 
+        echo "pv is found in PATH"; 
+        pv -n $DIR/node.txz  | tar -xJf - -C $DIR/node/ 
+        copy "Node.js (part 1/4)" $DIR/node/*/bin $HOME/teste
+        copy "Node.js (part 2/4)" $DIR/node/*/include $HOME/teste
+        copy "Node.js (part 3/4)" /tmp/node*/lib $HOME/.local
+        copy "Node.js (part 4/4)" /tmp/node*/share $HOME/.local
+    else 
+        curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o $HOME/Desktop/install_nvm.sh
+        chmod +x $HOME/Desktop/install_nvm.sh
+        bash $HOME/Desktop/install_nvm.sh
+        source ~/.profile
+        nvm install
+    fi    
 
     finished "Node.js installed successfully!"
 }
@@ -134,10 +144,10 @@ function MAIN {
     essentials
 	settings
     backgroundImage
+    nodeJS  
     firefoxDEV
     configFirefoxDEV
     code
-    configCode
-    nodeJS    
+    configCode  
 }
 MAIN

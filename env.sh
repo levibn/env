@@ -125,8 +125,9 @@ function nodeJS {
 
 
 function configCode {    
-    chmod +x $HOME/Desktop/linuxvs/make.sh
-    .$HOME/Desktop/linuxvs/make.sh
+    cd $HOME/Desktop/linuxvs/
+    chmod +x make.sh
+    bash make.sh
     addShortcut code.desktop
 }
 
